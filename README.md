@@ -1,7 +1,7 @@
-- 👋 Hi, I’m @danko91
-- 👀 I’m interested in electronic
-- 🌱 I’m currently learning microcontrollers programming
-- 💞️ I’m looking to collaborate on ...
+- 👋 Hi, this is a LemonTech space
+- 👀 We're interested in electronic
+- 🌱 We're currently creating a new devices 
+- 💞️ We're looking to collaborate on
 - 📫 How to reach me 
 
 <!---

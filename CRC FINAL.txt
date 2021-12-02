@@ -1,0 +1,68 @@
+/******************************************************************************
+
+                            Online C Compiler.
+                Code, Compile, Run and Debug C program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <stdio.h>
+
+int main()
+{
+    // unsigned data[9] = {73, 49, 73, 97, 109, 73, 82, 193, 130};
+    unsigned data[9] = {73, 50, 0, 0, 0, 0, 20, 193, 130};
+        // unsigned data[9];
+
+    unsigned polynomialCRC = 0xA001;
+    unsigned CRC16 = 0xFFFF;
+    
+    unsigned obliczCRC(unsigned Buffer[], unsigned Byte)
+    {
+        // unsigned polynomialCRC = 0xA001;
+        // unsigned CRC16 = 0xFFFF;
+        unsigned size = 0;
+        
+        while(size<Byte)
+        {
+            CRC16 = CRC16 ^ data[size];                                    //dzielenie XOR CRCinit z pierwszym bajtem danych
+            
+            for(int i=0; i<8; i++)
+            {
+                if((CRC16 & 0x0001)==1)                                     
+                {
+                    CRC16 = CRC16 >> 1;
+                    CRC16 = CRC16 ^ polynomialCRC;
+                }
+                else if((CRC16 & 0x0001)==0)
+                {
+                    CRC16 = CRC16 >> 1;
+                }
+            }
+            size++;
+        }
+        return CRC16;
+    }
+    
+    unsigned CRC16_Hi = 0; 
+    unsigned CRC16_Lo = 0; 
+    // unsigned data[2] = {0x02, 0x07};
+    // data[9] = {0x49, 0x31, 0x49, 0x61, 0x6D, 0x49, 0x52, 0xC1, 0x82};
+
+    
+    
+    CRC16 = obliczCRC(data, 7);
+    
+    
+    CRC16_Hi = CRC16 >> 8;                                                    //wyzmacz CRC16_Hi
+    CRC16_Lo = CRC16 & 0x00FF;                                              //wyznacz CRC16_Lo
+    
+    // printf("CRCinit: %X \n", CRC16);
+    printf("polynomialCRC: %X \n", polynomialCRC);
+    // printf("firstbyte: %X \n", firstbyte);
+    printf("CRC16: %X \n", CRC16);
+    printf("CRC16_Hi: HEX: %X, DEC: %u \n", CRC16_Hi, CRC16_Hi);
+    printf("CRC16_Lo: HEX: %X, DEC: %u \n", CRC16_Lo, CRC16_Lo);
+
+    return 0;
+}
